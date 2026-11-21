@@ -4,17 +4,22 @@ import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-export function ThemeToggle() {
-  const { setTheme, theme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+const emptySubscribe = () => () => {};
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+export function ThemeToggle() {
+  const { setTheme, resolvedTheme } = useTheme();
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   if (!mounted) {
     return (
-      <button className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-glass-border bg-glass-bg text-foreground transition-all">
+      <button
+        aria-label="Toggle theme"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-foreground transition-all"
+      >
         <span className="sr-only">Toggle theme</span>
       </button>
     );
@@ -25,7 +30,8 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-glass-border bg-glass-bg text-foreground transition-all hover:bg-foreground hover:text-background"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-foreground transition-all hover:bg-foreground hover:text-background active:scale-95"
+      aria-label="Toggle theme"
     >
       {isDark ? (
         <Sun className="h-4 w-4 transition-all" />

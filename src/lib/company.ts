@@ -13,13 +13,15 @@ export const company = {
   tiktok: "https://www.tiktok.com/",
   instagram: "https://www.instagram.com/",
   instagramHandle: "alburhanherbal",
+  founder: "Al-Burhan",
   siteUrl: "https://al-burhan.example",
 };
 
 export const mainNav = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "Our story" },
+  { href: "/products", label: "Products" },
   { href: "/services", label: "Services" },
+  { href: "/about", label: "Our story" },
   { href: "/contact", label: "Contact" },
 ];
 
