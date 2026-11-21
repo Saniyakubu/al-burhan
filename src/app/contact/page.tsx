@@ -1,7 +1,21 @@
 import { Mail, MapPin, MessageCircle, Phone, ArrowUpRight } from "lucide-react";
-import { company } from "@/lib/company";
+import { getCompanyProfile } from "@/sanity/queries";
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const profile = await getCompanyProfile();
+
+  const phoneDisplay = profile.phoneDisplay || profile.phone || "+234 806 709 3195";
+  const phoneInternational = profile.phoneInternational || "+2348067093195";
+  const email = profile.email || "madrasatuburhan20@gmail.com";
+  const whatsappUrl =
+    profile.whatsappUrl ||
+    "https://wa.me/2347055435599?text=Hello%20Al-Burhan%2C%20I%27d%20like%20to%20book%20a%20consultation.";
+  const office = profile.office || "Sabon Gari, Zaria, Kaduna State, Nigeria";
+  const cities = profile.cities || "Kaduna State, Nigeria";
+  const noteOnCare =
+    profile.noteOnCare ||
+    "Please share what you would like help with when you contact us. Our team can explain the screening or therapy options available and advise on the next step. This website is for information and appointment enquiries; it is not a substitute for emergency medical care.";
+
   return (
     <div className="pb-16 sm:pb-24">
       {/* Header */}
@@ -12,7 +26,7 @@ export default function ContactPage() {
         </h1>
         <p className="mx-auto mt-4 sm:mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
           Reach our team to ask about a consultation, therapy session or herbal
-          product in Zaria, Kaduna State.
+          product in {cities}.
         </p>
       </header>
 
@@ -24,7 +38,7 @@ export default function ContactPage() {
           <div className="mt-6 sm:mt-9 grid gap-3 sm:gap-4 text-sm sm:text-base">
             {/* Phone */}
             <a
-              href={`tel:${company.phoneInternational}`}
+              href={`tel:${phoneInternational}`}
               className="flex items-center gap-3.5 sm:gap-4 rounded-2xl border border-border/80 bg-surface/80 p-4 transition-all duration-150 active:scale-[0.98] active:bg-muted hover:border-foreground/20"
             >
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-foreground text-background">
@@ -35,7 +49,7 @@ export default function ContactPage() {
                   Call Centre
                 </strong>
                 <span className="block truncate font-medium text-foreground text-sm sm:text-base">
-                  {company.phoneDisplay}
+                  {phoneDisplay}
                 </span>
               </div>
               <ArrowUpRight size={16} className="text-muted-foreground shrink-0" />
@@ -43,7 +57,7 @@ export default function ContactPage() {
 
             {/* WhatsApp */}
             <a
-              href={company.whatsappUrl}
+              href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-3.5 sm:gap-4 rounded-2xl border border-[#25D366]/30 bg-[#25D366]/5 p-4 transition-all duration-150 active:scale-[0.98] active:bg-[#25D366]/10 hover:border-[#25D366]/50"
@@ -64,7 +78,7 @@ export default function ContactPage() {
 
             {/* Email */}
             <a
-              href={`mailto:${company.email}`}
+              href={`mailto:${email}`}
               className="flex items-center gap-3.5 sm:gap-4 rounded-2xl border border-border/80 bg-surface/80 p-4 transition-all duration-150 active:scale-[0.98] active:bg-muted hover:border-foreground/20"
             >
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-muted text-foreground">
@@ -75,7 +89,7 @@ export default function ContactPage() {
                   Email
                 </strong>
                 <span className="block truncate font-medium text-foreground text-xs sm:text-sm">
-                  {company.email}
+                  {email}
                 </span>
               </div>
               <ArrowUpRight size={16} className="text-muted-foreground shrink-0" />
@@ -83,7 +97,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Visit Us */}
+        {/* Visit Us / Location */}
         <div className="modern-card bg-foreground p-6 text-background sm:p-9 md:p-12 flex flex-col justify-between">
           <div>
             <p className="eyebrow border-background/20 bg-background/5 text-background">
@@ -93,16 +107,16 @@ export default function ContactPage() {
               <MapPin size={24} />
             </div>
             <h2 className="mt-5 text-2xl sm:text-3xl font-medium tracking-tight">
-              Sabon Gari, Zaria.
+              {office.split(",")[0]?.trim() || "Sabon Gari"}, {office.split(",")[1]?.trim() || "Zaria"}.
             </h2>
             <p className="mt-2.5 max-w-sm text-sm sm:text-base leading-relaxed text-background/70">
-              Kaduna State, Nigeria. Contact the team ahead of your visit so we
-              can help you plan the right appointment.
+              {office}. Contact the team ahead of your visit so we can help you
+              plan the right appointment.
             </p>
           </div>
           <div className="mt-8">
             <a
-              href={company.whatsappUrl}
+              href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="button-secondary w-full sm:w-auto border-background/25 bg-background/10 text-background hover:bg-background hover:text-foreground active:scale-95"
@@ -123,11 +137,7 @@ export default function ContactPage() {
             </h2>
           </div>
           <p className="max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-            Please share what you would like help with when you contact us. Our
-            team can explain the screening or therapy options available and
-            advise on the next step. This website is for information and
-            appointment enquiries; it is not a substitute for emergency medical
-            care.
+            {noteOnCare}
           </p>
         </div>
       </section>

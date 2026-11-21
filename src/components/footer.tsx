@@ -1,7 +1,17 @@
 import Link from "next/link";
 import { company, mainNav } from "@/lib/company";
+import type { SanityCompanyProfile } from "@/sanity/queries";
 
-export function Footer() {
+type FooterProps = {
+  profile?: SanityCompanyProfile;
+};
+
+export function Footer({ profile }: FooterProps) {
+  const office = profile?.office || company.office;
+  const phoneDisplay = profile?.phoneDisplay || profile?.phone || company.phoneDisplay;
+  const phoneInternational = profile?.phoneInternational || company.phoneInternational;
+  const email = profile?.email || company.email;
+
   return (
     <footer className="border-t border-border bg-surface pb-28 sm:pb-24 lg:pb-12">
       <div className="page-shell grid gap-8 sm:gap-10 py-10 md:py-12 md:grid-cols-[1.2fr_1fr_1fr]">
@@ -37,18 +47,18 @@ export function Footer() {
             Visit & Connect
           </p>
           <div className="grid gap-2.5 text-sm text-muted-foreground">
-            <span>{company.office}</span>
+            <span>{office}</span>
             <a
-              href={`tel:${company.phoneInternational}`}
+              href={`tel:${phoneInternational}`}
               className="py-0.5 transition-colors hover:text-foreground active:text-[#a67931]"
             >
-              {company.phoneDisplay}
+              {phoneDisplay}
             </a>
             <a
-              href={`mailto:${company.email}`}
+              href={`mailto:${email}`}
               className="py-0.5 transition-colors hover:text-foreground active:text-[#a67931]"
             >
-              {company.email}
+              {email}
             </a>
           </div>
         </div>

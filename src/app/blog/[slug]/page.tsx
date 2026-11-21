@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { PortableText } from "next-sanity";
 import { sanityClient } from "@/sanity/client";
 import { BLOG_POST_QUERY, BLOG_POST_SLUGS_QUERY } from "@/sanity/blog-queries";
-import { PageIntro } from "@/components/page-intro";
 import { urlForImage } from "@/sanity/image";
 import { company } from "@/lib/company";
 import { buildSeoMetadata } from "@/lib/seo";

@@ -15,21 +15,31 @@ import {
   productsData,
   PRODUCT_CATEGORIES,
   type Product,
-  type ProductCategory,
 } from "@/lib/products-data";
 import { ProductModal } from "./product-modal";
 
 const INITIAL_PAGE_SIZE = 8;
 
-export function ProductGalleryClient() {
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>("All");
+type ProductGalleryClientProps = {
+  initialProducts?: Product[];
+  categories?: string[];
+};
+
+export function ProductGalleryClient({
+  initialProducts,
+  categories,
+}: ProductGalleryClientProps) {
+  const allProducts = initialProducts && initialProducts.length > 0 ? initialProducts : productsData;
+  const filterCategories = categories && categories.length > 0 ? categories : (PRODUCT_CATEGORIES as unknown as string[]);
+
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_PAGE_SIZE);
 
   // Filter products by category and search query
   const filteredProducts = useMemo(() => {
-    return productsData.filter((product) => {
+    return allProducts.filter((product) => {
       const matchesCategory =
         selectedCategory === "All" || product.category === selectedCategory;
 
@@ -47,7 +57,7 @@ export function ProductGalleryClient() {
         product.ingredients.some((ing) => ing.toLowerCase().includes(q))
       );
     });
-  }, [selectedCategory, searchQuery]);
+  }, [allProducts, selectedCategory, searchQuery]);
 
   // Paginated slice
   const displayedProducts = useMemo(() => {
@@ -58,12 +68,12 @@ export function ProductGalleryClient() {
 
   // Counts per category
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: productsData.length };
-    productsData.forEach((p) => {
+    const counts: Record<string, number> = { All: allProducts.length };
+    allProducts.forEach((p) => {
       counts[p.category] = (counts[p.category] || 0) + 1;
     });
     return counts;
-  }, []);
+  }, [allProducts]);
 
   return (
     <div>
@@ -99,7 +109,7 @@ export function ProductGalleryClient() {
         {/* Categories Tab Bar */}
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:justify-center">
           <div className="flex items-center gap-1.5 shrink-0">
-            {PRODUCT_CATEGORIES.map((cat) => {
+            {filterCategories.map((cat) => {
               const isActive = selectedCategory === cat;
               const count = categoryCounts[cat] || 0;
 

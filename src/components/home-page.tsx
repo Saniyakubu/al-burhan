@@ -2,10 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, HeartPulse, ScanLine, Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  HeartPulse,
+  ScanLine,
+  Sparkles,
+  CircleGauge,
+  Dumbbell,
+  Leaf,
+} from "lucide-react";
 import { motion } from "framer-motion";
+import type { SanityCompanyProfile, SanityService } from "@/sanity/queries";
 
-const services = [
+const ICON_MAP = {
+  ScanLine,
+  HeartPulse,
+  Sparkles,
+  CircleGauge,
+  Dumbbell,
+  Leaf,
+};
+
+const fallbackServices = [
   {
     title: "Quantum Resonance Magnetic",
     text: "Modern diagnostic screening to help identify health concerns before choosing a care pathway.",
@@ -23,7 +41,23 @@ const services = [
   },
 ];
 
-export function HomePage() {
+type HomePageProps = {
+  services?: SanityService[];
+  profile?: SanityCompanyProfile;
+};
+
+export function HomePage({ services: initialServices, profile }: HomePageProps) {
+  const displayServices =
+    initialServices && initialServices.length > 0
+      ? initialServices.slice(0, 3).map((s) => ({
+          title: s.title,
+          text: s.desc,
+          icon: ICON_MAP[s.icon as keyof typeof ICON_MAP] || Sparkles,
+        }))
+      : fallbackServices;
+
+  const yearEstablished = profile?.yearEstablished || "2015";
+  const cities = profile?.cities || "Zaria, Kaduna State";
   return (
     <div>
       {/* Hero Section */}
@@ -60,15 +94,17 @@ export function HomePage() {
             <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-8 border-t border-border pt-5 sm:pt-6 text-sm text-muted-foreground">
               <div className="rounded-2xl border border-border/70 bg-surface/60 p-3.5 sm:border-0 sm:bg-transparent sm:p-0">
                 <strong className="block text-xl sm:text-2xl font-semibold text-foreground">
-                  2015
+                  {yearEstablished}
                 </strong>
                 <span className="text-xs sm:text-sm">serving the community</span>
               </div>
               <div className="rounded-2xl border border-border/70 bg-surface/60 p-3.5 sm:border-0 sm:bg-transparent sm:p-0">
                 <strong className="block text-xl sm:text-2xl font-semibold text-foreground">
-                  Zaria
+                  {cities.split(",")[0]?.trim() || "Zaria"}
                 </strong>
-                <span className="text-xs sm:text-sm">Kaduna State</span>
+                <span className="text-xs sm:text-sm">
+                  {cities.split(",").slice(1).join(",").trim() || "Kaduna State"}
+                </span>
               </div>
             </div>
           </motion.div>
@@ -153,7 +189,7 @@ export function HomePage() {
             </Link>
           </div>
           <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, i) => {
+            {displayServices.map((service, i) => {
               const Icon = service.icon;
               return (
                 <motion.article

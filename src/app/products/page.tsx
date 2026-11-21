@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProductGalleryClient } from "@/components/product-gallery-client";
+import { getProducts, getProductCategories } from "@/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Herbal Product Gallery | Al-Burhan",
@@ -7,7 +8,12 @@ export const metadata: Metadata = {
     "Explore natural Islamic herbal medicines, therapeutic wellness teas, and clinical remedies from Al-Burhan Islamic Herbal Medicine Centre Ltd in Zaria, Kaduna State.",
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const [products, categories] = await Promise.all([
+    getProducts(),
+    getProductCategories(),
+  ]);
+
   return (
     <div className="pb-16 sm:pb-24">
       {/* Page Header */}
@@ -25,7 +31,10 @@ export default function ProductsPage() {
 
       {/* Main Interactive Gallery Section */}
       <section className="page-shell mt-10 sm:mt-16">
-        <ProductGalleryClient />
+        <ProductGalleryClient
+          initialProducts={products}
+          categories={categories}
+        />
       </section>
     </div>
   );

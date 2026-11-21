@@ -1,39 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, CircleGauge, Dumbbell, Leaf } from "lucide-react";
+import {
+  ArrowUpRight,
+  CircleGauge,
+  Dumbbell,
+  Leaf,
+  Sparkles,
+  HeartPulse,
+  ScanLine,
+} from "lucide-react";
+import { getServices } from "@/sanity/queries";
 
-const services = [
-  {
-    title: "Quantum Resonance Magnetic",
-    tag: "Screening",
-    desc: "Modern equipment-assisted screening to help us understand the health concerns you bring to us and recommend the next step with care.",
-    icon: CircleGauge,
-    image: "/al-burhan/product-herbal.jpg",
-  },
-  {
-    title: "Gun massager therapy",
-    tag: "Wellness therapy",
-    desc: "Supportive massage focused on relaxation, muscle comfort and mobility as part of a considered wellness routine.",
-    icon: Dumbbell,
-    image: "/al-burhan/product-precious-detail.png",
-  },
-  {
-    title: "Cupping therapy",
-    tag: "Traditional therapy",
-    desc: "A traditional wellness therapy delivered in a calm, clean environment by a team that takes your comfort seriously.",
-    icon: Leaf,
-    image: "/al-burhan/product-safety.jpg",
-  },
-  {
-    title: "Herbal consultations",
-    tag: "Natural remedies",
-    desc: "A guided conversation about your goals, symptoms and suitable herbal products from the Al-Burhan range.",
-    icon: Leaf,
-    image: "/al-burhan/product-success.jpg",
-  },
-];
+const ICON_MAP = {
+  CircleGauge,
+  Dumbbell,
+  Leaf,
+  Sparkles,
+  HeartPulse,
+  ScanLine,
+};
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
+
   return (
     <div className="pb-16 sm:pb-24">
       <header className="page-shell pt-10 sm:pt-16 md:pt-24">
@@ -49,10 +38,12 @@ export default function ServicesPage() {
 
       <section className="page-shell mt-10 sm:mt-16 grid gap-5 sm:gap-6 md:grid-cols-2">
         {services.map((service) => {
-          const Icon = service.icon;
+          const Icon =
+            ICON_MAP[service.icon as keyof typeof ICON_MAP] || Sparkles;
+
           return (
             <article
-              key={service.title}
+              key={service.id || service.title}
               className="modern-card grid overflow-hidden sm:grid-cols-[.85fr_1.15fr]"
             >
               <div className="relative min-h-[200px] sm:min-h-[240px] bg-muted/40">

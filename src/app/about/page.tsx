@@ -1,7 +1,29 @@
 import Link from "next/link";
 import { ArrowUpRight, Eye, HeartHandshake } from "lucide-react";
+import { getCompanyProfile } from "@/sanity/queries";
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const profile = await getCompanyProfile();
+
+  const missionText =
+    profile.mission ||
+    "To provide safe, effective herbal medicines made from natural herbs and plants, guided by the Qur’an and Sunnah of the Prophet Muhammad (S.A.W.), for the health and wellbeing of the community.";
+
+  const visionText =
+    profile.vision ||
+    "To become a trusted herbal healthcare company known for quality, integrity and improving community health across Nigeria and beyond.";
+
+  const storyIntro =
+    profile.aboutStory ||
+    "Al-Burhan Islamic Herbal Medicine Centre Ltd was established to provide quality natural herbal solutions and contribute to the wellbeing of the community.";
+
+  const howWeWorkTitle =
+    profile.howWeWorkTitle || "Listen first. Screen carefully. Care naturally.";
+
+  const howWeWorkText =
+    profile.howWeWorkText ||
+    "Our team begins with a conversation and health screening using modern diagnostic equipment. We then discuss an appropriate care pathway and herbal remedies made from natural herbs and plants.";
+
   return (
     <div className="pb-16 sm:pb-24">
       {/* Header */}
@@ -11,13 +33,11 @@ export default function AboutPage() {
           Herbal care grounded in faith and community.
         </h1>
         <p className="mx-auto mt-4 sm:mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
-          Al-Burhan Islamic Herbal Medicine Centre Ltd was established to provide
-          quality natural herbal solutions and contribute to the wellbeing of
-          the community.
+          {storyIntro}
         </p>
       </header>
 
-      {/* Mission & Vision */}
+      {/* Mission & Vision - The Two Values in Our Story Divs */}
       <section className="page-shell mt-12 sm:mt-20 grid gap-5 sm:gap-6 md:grid-cols-2">
         <article className="modern-card p-6 sm:p-9 md:p-14">
           <div className="mb-6 sm:mb-8 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-foreground text-background">
@@ -25,9 +45,7 @@ export default function AboutPage() {
           </div>
           <p className="eyebrow">OUR MISSION</p>
           <p className="mt-5 sm:mt-7 text-lg sm:text-2xl font-medium leading-relaxed text-foreground/80">
-            To provide safe, effective herbal medicines made from natural herbs
-            and plants, guided by the Qur’an and Sunnah of the Prophet Muhammad
-            (S.A.W.), for the health and wellbeing of the community.
+            {missionText}
           </p>
         </article>
 
@@ -37,8 +55,7 @@ export default function AboutPage() {
           </div>
           <p className="eyebrow">OUR VISION</p>
           <p className="mt-5 sm:mt-7 text-lg sm:text-2xl font-medium leading-relaxed text-foreground/80">
-            To become a trusted herbal healthcare company known for quality,
-            integrity and improving community health across Nigeria and beyond.
+            {visionText}
           </p>
         </article>
       </section>
@@ -48,15 +65,11 @@ export default function AboutPage() {
         <div>
           <p className="eyebrow">HOW WE WORK</p>
           <h2 className="display-title mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-6xl">
-            Listen first. Screen carefully. Care naturally.
+            {howWeWorkTitle}
           </h2>
         </div>
         <div className="text-base sm:text-lg leading-relaxed text-muted-foreground">
-          <p>
-            Our team begins with a conversation and health screening using
-            modern diagnostic equipment. We then discuss an appropriate care
-            pathway and herbal remedies made from natural herbs and plants.
-          </p>
+          <p>{howWeWorkText}</p>
           <p className="mt-4 sm:mt-6">
             Our product range includes The Safety, The Success, Precious, Your
             Happiness, My Dear, Joint Pain Relief and Spiritual Problems Cure.

@@ -17,11 +17,21 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { company, mainNav } from "@/lib/company";
+import type { SanityCompanyProfile } from "@/sanity/queries";
 
-export function Header() {
+type HeaderProps = {
+  profile?: SanityCompanyProfile;
+};
+
+export function Header({ profile }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
+
+  const phoneInternational = profile?.phoneInternational || company.phoneInternational;
+  const phoneDisplay = profile?.phoneDisplay || profile?.phone || company.phoneDisplay;
+  const whatsappUrl = profile?.whatsappUrl || company.whatsappUrl;
+  const office = profile?.office || company.office;
 
   // Close menu on route change
   if (prevPathname !== pathname) {
@@ -110,7 +120,7 @@ export function Header() {
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* Direct Call Button for Mobile (High intent) */}
             <a
-              href={`tel:${company.phoneInternational}`}
+              href={`tel:${phoneInternational}`}
               className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border bg-surface text-foreground transition-transform active:scale-90 lg:hidden shrink-0"
               aria-label="Call Al-Burhan"
             >
@@ -219,7 +229,7 @@ export function Header() {
               </p>
               <div className="grid grid-cols-2 gap-3">
                 <a
-                  href={`tel:${company.phoneInternational}`}
+                  href={`tel:${phoneInternational}`}
                   className="flex flex-col gap-2 rounded-2xl border border-border bg-surface p-4 transition-transform active:scale-95"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground text-background">
@@ -229,14 +239,14 @@ export function Header() {
                     <span className="block text-xs font-bold text-foreground">
                       Call Center
                     </span>
-                    <span className="block text-[0.7rem] text-muted-foreground">
-                      +234 806 709 3195
+                    <span className="block text-[0.7rem] text-muted-foreground truncate">
+                      {phoneDisplay}
                     </span>
                   </div>
                 </a>
 
                 <a
-                  href={company.whatsappUrl}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="flex flex-col gap-2 rounded-2xl border border-border bg-surface p-4 transition-transform active:scale-95"
@@ -267,7 +277,7 @@ export function Header() {
                     Centre Location
                   </p>
                   <p className="mt-0.5 text-xs text-muted-foreground">
-                    {company.office}
+                    {office}
                   </p>
                 </div>
               </div>

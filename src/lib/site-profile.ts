@@ -1,5 +1,5 @@
 import { sanityClient } from "@/sanity/client";
-import { SITE_PROFILE_QUERY } from "@/sanity/queries";
+import { COMPANY_PROFILE_QUERY } from "@/sanity/queries";
 import { company as fallbackCompany } from "./company";
 
 export type SiteProfile = {
@@ -21,7 +21,10 @@ export type SiteProfile = {
 
 export async function getSiteProfile(): Promise<SiteProfile> {
   try {
-    const profile = await sanityClient.fetch<SiteProfile | null>(SITE_PROFILE_QUERY, {});
+    const profile = await sanityClient.fetch<SiteProfile | null>(
+      COMPANY_PROFILE_QUERY,
+      {},
+    );
     if (profile) {
       return profile;
     }
@@ -42,7 +45,12 @@ export async function getSiteProfile(): Promise<SiteProfile> {
     instagram: fallbackCompany.instagram,
     currentLines: ["Vehicles", "Fashion"],
     sourcingChannels: ["Local purchase", "Import", "Auction"],
-    growthRoadmap: ["Real estate", "Agriculture", "Manufacturing", "Consulting"],
+    growthRoadmap: [
+      "Real estate",
+      "Agriculture",
+      "Manufacturing",
+      "Consulting",
+    ],
     brandColors: ["Deep navy blue", "Metallic gold", "White", "Cream"],
   };
 }
