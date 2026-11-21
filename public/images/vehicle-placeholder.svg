@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Sample vehicle listing placeholder</title>
+  <desc id="desc">Plain placeholder graphic for Savvy Prime Ltd vehicle inventory.</desc>
+  <rect width="640" height="360" fill="#f4f4f5"/>
+  <rect x="150" y="155" width="340" height="70" fill="#ffffff" stroke="#111827" stroke-width="4"/>
+  <path d="M205 155h230l-45-55H250z" fill="#ffffff" stroke="#111827" stroke-width="4"/>
+  <circle cx="225" cy="230" r="28" fill="#ffffff" stroke="#111827" stroke-width="4"/>
+  <circle cx="415" cy="230" r="28" fill="#ffffff" stroke="#111827" stroke-width="4"/>
+  <text x="320" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#111827">Sample vehicle image</text>
+</svg>

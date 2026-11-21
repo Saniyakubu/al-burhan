@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Sample fashion listing placeholder</title>
+  <desc id="desc">Plain placeholder graphic for Savvy Prime Ltd fashion inventory.</desc>
+  <rect width="640" height="360" fill="#f4f4f5"/>
+  <path d="M260 90h120l45 70-40 25v90H255v-90l-40-25z" fill="#ffffff" stroke="#111827" stroke-width="4"/>
+  <path d="M285 90c10 25 60 25 70 0" fill="none" stroke="#111827" stroke-width="4"/>
+  <text x="320" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#111827">Sample fashion image</text>
+</svg>
