@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
@@ -100,6 +101,7 @@ export default async function RootLayout({
         <Footer contacts={contacts} />
         <MobileBottomNav />
         <FloatingWhatsApp whatsappUrl={contacts.whatsappUrl ?? ""} />
+        <Analytics />
       </body>
     </html>
   );
