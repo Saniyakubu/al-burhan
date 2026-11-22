@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "next-sanity";
+import type { PortableTextBlock } from "@portabletext/types";
 import { sanityClient } from "@/sanity/client";
 import { BLOG_POST_QUERY, BLOG_POST_SLUGS_QUERY } from "@/sanity/blog-queries";
 import { urlForImage } from "@/sanity/image";
@@ -19,7 +20,7 @@ type BlogPost = {
   excerpt: string;
   category: string;
   publishedAt: string;
-  body: unknown;
+  body: PortableTextBlock[];
   coverAlt?: string;
   coverImage?: unknown;
 };
@@ -146,7 +147,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
         <div className="max-w-6xl mx-auto grid gap-16 lg:grid-cols-[1fr_20rem]">
           {/* Main Content Area */}
           <div className="blog-body w-full max-w-3xl mx-auto lg:mx-0">
-            <PortableText value={post.body as any} />
+            <PortableText value={post.body} />
           </div>
 
           {/* Sticky Sidebar */}

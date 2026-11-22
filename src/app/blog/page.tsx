@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { sanityClient } from "@/sanity/client";
 import { BLOG_POSTS_QUERY } from "@/sanity/blog-queries";
-import { PageIntro } from "@/components/page-intro";
 import { BlogIndexClient } from "@/components/blog-index-client";
 import { buildSeoMetadata } from "@/lib/seo";
 

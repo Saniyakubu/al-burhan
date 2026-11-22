@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, ShieldCheck, Target, TrendingUp } from "lucide-react";
+import { Building2 } from "lucide-react";
 
 export default function PropertiesPage() {
   const fadeUp = {
@@ -42,7 +42,7 @@ export default function PropertiesPage() {
               <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/properties-bg.jpg')" }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-8 left-8 right-8 text-white">
-                <p className="font-serif text-2xl italic font-medium">"Sharp sourcing instinct turned into premium outcomes."</p>
+                <p className="font-serif text-2xl italic font-medium">&quot;Sharp sourcing instinct turned into premium outcomes.&quot;</p>
               </div>
             </div>
           </motion.div>
@@ -58,7 +58,7 @@ export default function PropertiesPage() {
                 Our real estate approach applies the exact same core competency that drives our other lines: identifying undervalued opportunity. We focus on securing prime land and properties that offer significant upside and immediate value.
               </p>
               <p>
-                By establishing a robust commercial footprint in key locations starting with New Millennium City, Kaduna, we are positioning Savvy Prime Properties to become a trusted name in the Nigerian real estate market. We don't just acquire land; we turn sharp sourcing instinct into dependable, high-standard value for our clients.
+                By establishing a robust commercial footprint in key locations starting with New Millennium City, Kaduna, we are positioning Savvy Prime Properties to become a trusted name in the Nigerian real estate market. We don&apos;t just acquire land; we turn sharp sourcing instinct into dependable, high-standard value for our clients.
               </p>
             </div>
           </motion.div>

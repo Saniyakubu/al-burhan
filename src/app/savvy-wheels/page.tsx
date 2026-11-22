@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CarFront, ShieldCheck, Target, TrendingUp } from "lucide-react";
+import { CarFront } from "lucide-react";
 
 export default function SavvyWheelsPage() {
   const fadeUp = {
@@ -65,7 +65,7 @@ export default function SavvyWheelsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-8 left-8 right-8 text-white">
                 <p className="font-serif text-2xl italic font-medium">
-                  "Sharp sourcing instinct turned into premium outcomes."
+                  &quot;Sharp sourcing instinct turned into premium outcomes.&quot;
                 </p>
               </div>
             </div>

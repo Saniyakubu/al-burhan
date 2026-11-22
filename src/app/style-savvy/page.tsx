@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shirt, ShieldCheck, Target, TrendingUp } from "lucide-react";
+import { Shirt } from "lucide-react";
 
 export default function StyleSavvyPage() {
   const fadeUp = {
@@ -65,7 +65,7 @@ export default function StyleSavvyPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-8 left-8 right-8 text-white">
                 <p className="font-serif text-2xl italic font-medium">
-                  "Premium apparel sourced for maximum margin."
+                  &quot;Premium apparel sourced for maximum margin.&quot;
                 </p>
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function StyleSavvyPage() {
             </h2>
             <div className="flex flex-col gap-6 text-lg font-medium text-muted-foreground leading-relaxed">
               <p>
-                Style Savvy applies Savvy Prime Ltd's core competency of value
+                Style Savvy applies Savvy Prime Ltd&apos;s core competency of value
                 identification directly to premium apparel sourcing and resale,
                 utilizing the same successful three channel approach.
               </p>
