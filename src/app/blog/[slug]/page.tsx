@@ -7,6 +7,7 @@ import { BLOG_POST_QUERY, BLOG_POST_SLUGS_QUERY } from "@/sanity/blog-queries";
 import { urlForImage } from "@/sanity/image";
 import { company } from "@/lib/company";
 import { buildSeoMetadata } from "@/lib/seo";
+import { getContacts } from "@/sanity/queries";
 
 type PostPageProps = {
   params: Promise<{ slug: string }>;
@@ -84,7 +85,10 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
 export default async function BlogPostPage({ params }: PostPageProps) {
   const { slug } = await params;
-  const post = await sanityClient.fetch<BlogPost | null>(BLOG_POST_QUERY, { slug });
+  const [post, contacts] = await Promise.all([
+    sanityClient.fetch<BlogPost | null>(BLOG_POST_QUERY, { slug }),
+    getContacts(),
+  ]);
 
   if (!post) {
     notFound();
@@ -156,9 +160,9 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             <div className="modern-card p-8">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-foreground mb-4">Contact</p>
               <p className="text-base font-medium leading-relaxed text-muted-foreground">
-                {company.phoneDisplay}
+                {contacts.phoneDisplay}
                 <br />
-                {company.email}
+                {contacts.email}
               </p>
             </div>
           </aside>

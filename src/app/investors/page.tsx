@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
-import { company } from "@/lib/company";
 
 export default function InvestorsPage() {
   const fadeUp = {
@@ -114,8 +113,8 @@ export default function InvestorsPage() {
             Sections marked with placeholders indicate data to be completed by the company (financial figures, registration numbers, and personnel) before external circulation.
           </motion.p>
           <motion.div variants={fadeUp} className="flex gap-4">
-            <a href={`mailto:${company.email}`} className="button-secondary border-background/20 text-background hover:bg-background hover:text-foreground">
-              Email {company.email}
+            <a href="/contact" className="button-secondary border-background/20 text-background hover:bg-background hover:text-foreground">
+              Contact the team
             </a>
           </motion.div>
         </motion.div>

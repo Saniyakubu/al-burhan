@@ -9,9 +9,10 @@ type ProductModalProps = {
   product: Product | null;
   onClose: () => void;
   phoneInternational?: string;
+  whatsappUrl?: string;
 };
 
-export function ProductModal({ product, onClose, phoneInternational }: ProductModalProps) {
+export function ProductModal({ product, onClose, phoneInternational, whatsappUrl }: ProductModalProps) {
   // Prevent background scroll when modal is active
   useEffect(() => {
     if (!product) return;
@@ -31,9 +32,13 @@ export function ProductModal({ product, onClose, phoneInternational }: ProductMo
 
   if (!product) return null;
 
-  const whatsappHref = `https://wa.me/2347055435599?text=${encodeURIComponent(
-    `Hello Al-Burhan, I am interested in inquiring about/ordering: ${product.name}. Please guide me on availability and dosage.`
-  )}`;
+  const whatsappHref = whatsappUrl
+    ? (() => {
+        const url = new URL(whatsappUrl);
+        url.searchParams.set("text", `Hello Al-Burhan, I am interested in inquiring about/ordering: ${product.name}. Please guide me on availability and dosage.`);
+        return url.toString();
+      })()
+    : undefined;
 
   return (
     <div

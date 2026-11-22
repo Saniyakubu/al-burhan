@@ -1,4 +1,4 @@
-import { company } from "@/lib/company";
+import { getContacts } from "@/sanity/queries";
 
 type ContactPayload = {
   name?: string;
@@ -12,14 +12,15 @@ function isValidEmail(email: string) {
 }
 
 async function sendContactEmail(payload: Required<ContactPayload>) {
+  const contacts = await getContacts();
   // TODO: Plug in a real transactional email service here, such as Resend or SendGrid.
   // Suggested env vars:
   // CONTACT_EMAIL_API_KEY=<real provider key>
   // CONTACT_TO_EMAIL=SAVVYPRIMELTD01@YAHOO.COM
   // The provider call should send payload.name, payload.email, payload.phone, and
-  // payload.message to company.email or CONTACT_TO_EMAIL.
+  // payload.message to the configured contacts email or CONTACT_TO_EMAIL.
   console.info("Contact message for Savvy Prime Ltd", {
-    to: process.env.CONTACT_TO_EMAIL || company.email,
+    to: process.env.CONTACT_TO_EMAIL || contacts.email,
     ...payload,
   });
 }

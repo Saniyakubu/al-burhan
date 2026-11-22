@@ -20,12 +20,14 @@ type ProductGalleryClientProps = {
   initialProducts: Product[];
   categories: string[];
   phoneInternational?: string;
+  whatsappUrl?: string;
 };
 
 export function ProductGalleryClient({
   initialProducts,
   categories,
   phoneInternational,
+  whatsappUrl,
 }: ProductGalleryClientProps) {
   const allProducts = initialProducts;
   const filterCategories = categories;
@@ -156,9 +158,13 @@ export function ProductGalleryClient({
       {displayedProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {displayedProducts.map((product) => {
-            const whatsappHref = `https://wa.me/2347055435599?text=${encodeURIComponent(
-              `Hello Al-Burhan, I'm interested in ordering/inquiring about: ${product.name}.`
-            )}`;
+            const whatsappHref = whatsappUrl
+              ? (() => {
+                  const url = new URL(whatsappUrl);
+                  url.searchParams.set("text", `Hello Al-Burhan, I'm interested in ordering/inquiring about: ${product.name}.`);
+                  return url.toString();
+                })()
+              : undefined;
 
             return (
               <article
@@ -285,6 +291,7 @@ export function ProductGalleryClient({
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
         phoneInternational={phoneInternational}
+        whatsappUrl={whatsappUrl}
       />
     </div>
   );

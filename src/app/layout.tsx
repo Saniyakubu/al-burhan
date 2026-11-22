@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
-import { getCompanyProfile } from "@/sanity/queries";
+import { getContacts } from "@/sanity/queries";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -40,18 +40,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const profile = await getCompanyProfile();
+  const contacts = await getContacts();
 
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
-        <Header profile={profile} />
+        <Header contacts={contacts} />
         <main className="flex-1 pt-[calc(4.25rem+env(safe-area-inset-top,0px))] pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
           {children}
         </main>
-        <Footer profile={profile} />
+        <Footer contacts={contacts} />
         <MobileBottomNav />
-        <FloatingWhatsApp whatsappUrl={profile.whatsappUrl ?? ""} />
+        <FloatingWhatsApp whatsappUrl={contacts.whatsappUrl ?? ""} />
       </body>
     </html>
   );

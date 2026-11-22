@@ -1,16 +1,15 @@
 import { Mail, MapPin, MessageCircle, Phone, ArrowUpRight } from "lucide-react";
-import { getCompanyProfile } from "@/sanity/queries";
+import { getCompanyProfile, getContacts } from "@/sanity/queries";
 
 export default async function ContactPage() {
-  const profile = await getCompanyProfile();
+  const [profile, contacts] = await Promise.all([getCompanyProfile(), getContacts()]);
 
-  const phoneDisplay = profile.phoneDisplay || profile.phone;
-  const phoneInternational = profile.phoneInternational;
-  const email = profile.email;
-  const whatsappUrl = profile.whatsappUrl;
-  const office = profile.office;
-  const cities = profile.cities;
-  const noteOnCare = profile.noteOnCare;
+  const phoneDisplay = contacts.phoneDisplay;
+  const phoneInternational = contacts.phoneInternational;
+  const email = contacts.email;
+  const whatsappUrl = contacts.whatsappUrl;
+  const office = contacts.office;
+  const cities = contacts.cities;
 
   return (
     <div className="pb-16 sm:pb-24">
@@ -133,7 +132,7 @@ export default async function ContactPage() {
             </h2>
           </div>
           <p className="max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-            {noteOnCare}
+            {profile.noteOnCare}
           </p>
         </div>
       </section>

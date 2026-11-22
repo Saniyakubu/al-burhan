@@ -12,7 +12,7 @@ import {
   Leaf,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import type { SanityCompanyProfile, SanityService } from "@/sanity/queries";
+import type { SanityCompanyProfile, SanityContacts, SanityService } from "@/sanity/queries";
 
 const ICON_MAP = {
   ScanLine,
@@ -26,9 +26,14 @@ const ICON_MAP = {
 type HomePageProps = {
   services: SanityService[];
   profile: SanityCompanyProfile;
+  contacts: SanityContacts;
 };
 
-export function HomePage({ services: initialServices, profile }: HomePageProps) {
+export function HomePage({
+  services: initialServices,
+  profile,
+  contacts,
+}: HomePageProps) {
   const displayServices = initialServices.slice(0, 3).map((s) => ({
     title: s.title,
     text: s.desc,
@@ -36,7 +41,7 @@ export function HomePage({ services: initialServices, profile }: HomePageProps) 
   }));
 
   const yearEstablished = profile.yearEstablished;
-  const cities = profile.cities;
+  const cities = contacts.cities;
   return (
     <div>
       {/* Hero Section */}
@@ -52,7 +57,7 @@ export function HomePage({ services: initialServices, profile }: HomePageProps) 
             </div>
             <h1 className="display-title max-w-3xl text-3xl sm:text-5xl md:text-7xl lg:text-8xl">
               Natural care for{" "}
-              <span className="text-[#a67931]">whole-person</span> wellbeing.
+              <span className="text-[#a67931]">whole person</span> wellbeing.
             </h1>
             <p className="mt-4 sm:mt-7 max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground md:text-xl">
               Al-Burhan Islamic Herbal Medicine Centre Ltd combines herbal
@@ -75,7 +80,9 @@ export function HomePage({ services: initialServices, profile }: HomePageProps) 
                 <strong className="block text-xl sm:text-2xl font-semibold text-foreground">
                   {yearEstablished}
                 </strong>
-                <span className="text-xs sm:text-sm">serving the community</span>
+                <span className="text-xs sm:text-sm">
+                  serving the community
+                </span>
               </div>
               <div className="rounded-2xl border border-border/70 bg-surface/60 p-3.5 sm:border-0 sm:bg-transparent sm:p-0">
                 <strong className="block text-xl sm:text-2xl font-semibold text-foreground">

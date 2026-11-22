@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { mainNav } from "@/lib/company";
-import type { SanityCompanyProfile } from "@/sanity/queries";
+import type { SanityContacts } from "@/sanity/queries";
 
 type FooterProps = {
-  profile?: SanityCompanyProfile;
+  contacts?: SanityContacts;
 };
 
-export function Footer({ profile }: FooterProps) {
-  const office = profile?.office;
-  const phoneDisplay = profile?.phoneDisplay || profile?.phone;
-  const phoneInternational = profile?.phoneInternational;
-  const email = profile?.email;
+export function Footer({ contacts }: FooterProps) {
+  const office = contacts?.office;
+  const phoneDisplay = contacts?.phoneDisplay;
+  const phoneInternational = contacts?.phoneInternational;
+  const email = contacts?.email;
 
   return (
     <footer className="border-t border-border bg-surface pb-28 sm:pb-24 lg:pb-12">

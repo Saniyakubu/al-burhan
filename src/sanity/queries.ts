@@ -4,19 +4,38 @@ import { urlForImage } from "./image";
 
 export const COMPANY_PROFILE_QUERY = defineQuery(`
   *[_type == "companyProfile"][0]{
-    _id, name, legalName, motto, founder, phone, phoneDisplay, phoneInternational,
-    whatsappUrl, email, office, cities, mission, vision, aboutStory,
-    howWeWorkTitle, howWeWorkText, noteOnCare, yearEstablished, tiktok, instagram, facebook
+    _id, name, legalName, motto, founder, mission, vision, aboutStory,
+    howWeWorkTitle, howWeWorkText, noteOnCare, yearEstablished
   }
 `);
 
 export type SanityCompanyProfile = {
   _id?: string; name?: string; legalName?: string; motto?: string; founder?: string;
-  phone?: string; phoneDisplay?: string; phoneInternational?: string; whatsappUrl?: string;
-  email?: string; office?: string; cities?: string; mission?: string; vision?: string;
+  mission?: string; vision?: string;
   aboutStory?: string; howWeWorkTitle?: string; howWeWorkText?: string; noteOnCare?: string;
-  yearEstablished?: string; tiktok?: string; instagram?: string; facebook?: string;
+  yearEstablished?: string;
 };
+
+export const CONTACTS_QUERY = defineQuery(`
+  *[_type == "contacts"][0]{
+    _id, title, phoneDisplay, phoneInternational, whatsappDisplay, whatsappUrl,
+    email, office, cities, googleMapsUrl, facebook, tiktok, instagram
+  }
+`);
+
+export type SanityContacts = {
+  _id?: string; title?: string; phoneDisplay?: string; phoneInternational?: string;
+  whatsappDisplay?: string; whatsappUrl?: string; email?: string; office?: string;
+  cities?: string; googleMapsUrl?: string; facebook?: string; tiktok?: string; instagram?: string;
+};
+
+export async function getContacts(): Promise<SanityContacts> {
+  const data = await sanityClient.fetch<SanityContacts | null>(
+    CONTACTS_QUERY, {}, { next: { revalidate: 60 } }
+  );
+  if (!data) throw new Error("Sanity contacts document is missing.");
+  return data;
+}
 
 export async function getCompanyProfile(): Promise<SanityCompanyProfile> {
   const data = await sanityClient.fetch<SanityCompanyProfile | null>(
