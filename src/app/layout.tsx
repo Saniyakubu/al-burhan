@@ -24,6 +24,29 @@ export const metadata: Metadata = {
   },
   description:
     "Al-Burhan Islamic Herbal Medicine Centre Ltd provides natural herbal remedies, wellness therapies and health screening in Zaria, Kaduna State.",
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    siteName: "Al-Burhan Islamic Herbal Medicine Centre",
+    title: "Al-Burhan | Islamic Herbal Medicine Centre",
+    description:
+      "Natural herbal remedies, health screening, and wellness therapies in Zaria, Kaduna.",
+    images: [
+      {
+        url: "/al-burhan/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Al-Burhan Islamic Herbal Medicine Centre logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Al-Burhan | Islamic Herbal Medicine Centre",
+    description:
+      "Natural herbal remedies, health screening, and wellness therapies in Zaria, Kaduna.",
+    images: ["/al-burhan/logo.png"],
+  },
   applicationName: "Al-Burhan",
   appleWebApp: {
     capable: true,
