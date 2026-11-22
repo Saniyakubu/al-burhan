@@ -3,7 +3,11 @@ export const company = {
   legalName: "AL-BURHAN ISLAMIC HERBAL MEDICINE CENTRE LTD",
   tagline: "Natural care. Guided by faith.",
   founder: "Al-Burhan",
-  siteUrl: "https://al-burhan.example",
+  siteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000"),
 };
 
 export const mainNav = [
@@ -14,4 +18,6 @@ export const mainNav = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function absoluteUrl(path = "") { return `${company.siteUrl}${path}`; }
+export function absoluteUrl(path = "") {
+  return new URL(path, company.siteUrl).toString();
+}

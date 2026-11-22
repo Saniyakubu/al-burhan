@@ -1,5 +1,13 @@
 import { Mail, MapPin, MessageCircle, Phone, ArrowUpRight } from "lucide-react";
+import type { Metadata } from "next";
 import { getCompanyProfile, getContacts } from "@/sanity/queries";
+
+export const metadata: Metadata = {
+  title: "Contact Al-Burhan in Zaria, Kaduna",
+  description:
+    "Contact Al-Burhan Islamic Herbal Medicine Centre in Zaria, Kaduna to ask about consultations, herbal remedies, screening, and wellness therapies.",
+  keywords: ["contact herbal medicine Zaria", "herbal centre Kaduna", "Al-Burhan phone", "Al-Burhan WhatsApp"],
+};
 
 export default async function ContactPage() {
   const [profile, contacts] = await Promise.all([getCompanyProfile(), getContacts()]);

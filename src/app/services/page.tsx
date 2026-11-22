@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowUpRight,
   CircleGauge,
@@ -10,6 +11,13 @@ import {
   ScanLine,
 } from "lucide-react";
 import { getServices } from "@/sanity/queries";
+
+export const metadata: Metadata = {
+  title: "Herbal Wellness Services and Therapies in Zaria",
+  description:
+    "Explore Al-Burhan's herbal consultations, health screening, cupping, massage, and wellness therapies in Zaria, Kaduna.",
+  keywords: ["wellness therapies Zaria", "cupping therapy Zaria", "herbal consultation Kaduna", "health screening Zaria"],
+};
 
 const ICON_MAP = {
   CircleGauge,

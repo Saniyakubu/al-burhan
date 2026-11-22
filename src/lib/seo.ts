@@ -23,13 +23,7 @@ export function buildSeoMetadata({
   return {
     title,
     description,
-    keywords: [
-      "Savvy Prime Ltd",
-      "Savvy Prime Limited",
-      "Kaduna",
-      "Abuja",
-      ...keywords,
-    ],
+    keywords: ["Al-Burhan", "Islamic herbal medicine", "Zaria", "Kaduna", ...keywords],
     alternates: {
       canonical: path,
     },

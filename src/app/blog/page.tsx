@@ -16,16 +16,15 @@ type BlogPost = {
 };
 
 export const metadata: Metadata = buildSeoMetadata({
-  title: "Blog | Savvy Prime Ltd",
+  title: "Al-Burhan Herbal Health Blog",
   description:
-    "Savvy Prime Ltd blog posts on vehicle sourcing in Kaduna, car import Nigeria, auction cars, fashion resale Nigeria, and the company story in Kaduna and Abuja.",
+    "Practical herbal health guidance, wellness education, and updates from Al-Burhan Islamic Herbal Medicine Centre in Zaria, Kaduna.",
   path: "/blog",
   keywords: [
-    "vehicle sourcing Kaduna",
-    "car import Nigeria",
-    "auction cars Nigeria",
-    "fashion resale Nigeria",
-    "Savvy Prime blog",
+    "herbal medicine Zaria",
+    "herbal remedies Kaduna",
+    "Islamic herbal medicine Nigeria",
+    "wellness therapies Zaria",
   ],
 });
 
@@ -41,10 +40,10 @@ export default async function BlogPage() {
             BLOG
           </div>
           <h1 className="display-title text-5xl md:text-7xl lg:text-8xl mb-8">
-            Notes from Savvy Prime.
+            Notes from Al-Burhan.
           </h1>
           <p className="text-xl font-medium text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Updates, buying guidance, and company notes from Savvy Prime Ltd in Kaduna and worldwide.
+            Herbal health education, wellness guidance, and news from our centre in Zaria, Kaduna.
           </p>
         </div>
       </header>

@@ -3,7 +3,9 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
-import { getContacts } from "@/sanity/queries";
+import { JsonLd } from "@/components/json-ld";
+import { company } from "@/lib/company";
+import { getCompanyProfile, getContacts } from "@/sanity/queries";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -15,6 +17,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(company.siteUrl),
   title: {
     default: "Al-Burhan | Islamic Herbal Medicine Centre",
     template: "%s | Al-Burhan",
@@ -40,11 +43,33 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const contacts = await getContacts();
+  const [profile, contacts] = await Promise.all([getCompanyProfile(), getContacts()]);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    name: profile.name || company.name,
+    legalName: profile.legalName,
+    description: profile.motto,
+    url: company.siteUrl,
+    logo: `${company.siteUrl}/al-burhan/logo.png`,
+    image: `${company.siteUrl}/al-burhan/logo.png`,
+    telephone: contacts.phoneInternational || contacts.phoneDisplay,
+    email: contacts.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: contacts.office,
+      addressLocality: "Zaria",
+      addressRegion: "Kaduna",
+      addressCountry: "NG",
+    },
+    areaServed: contacts.cities,
+    sameAs: [contacts.facebook, contacts.instagram, contacts.tiktok].filter(Boolean),
+  };
 
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
+        <JsonLd data={structuredData} />
         <Header contacts={contacts} />
         <main className="flex-1 pt-[calc(4.25rem+env(safe-area-inset-top,0px))] pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
           {children}

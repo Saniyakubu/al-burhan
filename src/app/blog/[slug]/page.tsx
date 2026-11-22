@@ -46,19 +46,18 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   return {
     ...buildSeoMetadata({
-      title: `${post.title} | Savvy Prime Ltd Blog`,
+      title: `${post.title} | Al-Burhan Herbal Health Blog`,
       description: post.excerpt,
       path: `/blog/${slug}`,
       keywords: [
         post.category,
-        "Savvy Prime Ltd blog",
-        "vehicle sourcing Kaduna",
-        "car import Nigeria",
-        "fashion resale Nigeria",
+        "Al-Burhan herbal health blog",
+        "herbal medicine Zaria",
+        "herbal remedies Kaduna",
       ],
     }),
     openGraph: {
-      title: `${post.title} | Savvy Prime Ltd Blog`,
+      title: `${post.title} | Al-Burhan Herbal Health Blog`,
       description: post.excerpt,
       url: `${company.siteUrl}/blog/${slug}`,
       siteName: company.name,
@@ -77,7 +76,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} | Savvy Prime Ltd Blog`,
+      title: `${post.title} | Al-Burhan Herbal Health Blog`,
       description: post.excerpt,
       images: imageUrl ? [imageUrl] : undefined,
     },
@@ -155,7 +154,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             <div className="modern-card p-8">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-foreground mb-4">About</p>
               <p className="text-base font-medium leading-relaxed text-muted-foreground">
-                {company.name} keeps the blog short, practical, and tied to the work the company already does.
+                {company.name} shares practical herbal health education and wellness guidance from our centre in Zaria.
               </p>
             </div>
             <div className="modern-card p-8">

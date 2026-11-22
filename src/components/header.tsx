@@ -127,14 +127,6 @@ export function Header({ contacts }: HeaderProps) {
               <Phone size={17} className="text-[#a67931]" />
             </a>
 
-            {/* Book Consultation button on Desktop - guaranteed no text breaking */}
-            <Link
-              href="/contact"
-              className="button-primary hidden lg:inline-flex whitespace-nowrap text-xs xl:text-sm px-4 py-2 xl:px-6 xl:py-2.5 shrink-0"
-            >
-              Book a consultation
-            </Link>
-
             {/* Mobile Menu Hamburger */}
             <button
               className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-border bg-surface text-foreground transition-transform active:scale-90 lg:hidden shrink-0"
@@ -283,16 +275,6 @@ export function Header({ contacts }: HeaderProps) {
               </div>
             </div>
 
-            {/* Primary Action Button */}
-            <div className="mt-6">
-              <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
-                className="button-primary w-full shadow-md"
-              >
-                Book a consultation
-              </Link>
-            </div>
           </div>
         </div>
       )}

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { company } from "@/lib/company";
+import { absoluteUrl } from "@/lib/company";
 import { sanityClient } from "@/sanity/client";
 import { BLOG_POST_SLUGS_QUERY } from "@/sanity/blog-queries";
 
@@ -9,9 +9,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/about",
-    "/savvy-wheels",
-    "/style-savvy",
-    "/properties",
+    "/products",
+    "/services",
     "/blog",
     "/contact",
   ];
@@ -24,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   return routes.map((route) => ({
-    url: `${company.siteUrl}${route}`,
+    url: absoluteUrl(route),
     lastModified: now,
     changeFrequency: route.startsWith("/blog") ? "weekly" : "monthly",
     priority:

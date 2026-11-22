@@ -199,7 +199,7 @@ export function ProductGalleryClient({
                       {product.category}
                     </span>
                     {product.badge && (
-                      <span className="rounded-full bg-[#b68a3c] px-2 py-0.5 text-[0.62rem] font-bold uppercase tracking-wider text-white shadow-sm">
+                      <span className="rounded-full bg-[#b68a3c] px-2 py-0.5 text-[0.62rem] font-bold uppercase tracking-wider text-foreground shadow-sm">
                         {product.badge}
                       </span>
                     )}
