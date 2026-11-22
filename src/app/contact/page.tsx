@@ -4,17 +4,13 @@ import { getCompanyProfile } from "@/sanity/queries";
 export default async function ContactPage() {
   const profile = await getCompanyProfile();
 
-  const phoneDisplay = profile.phoneDisplay || profile.phone || "+234 806 709 3195";
-  const phoneInternational = profile.phoneInternational || "+2348067093195";
-  const email = profile.email || "madrasatuburhan20@gmail.com";
-  const whatsappUrl =
-    profile.whatsappUrl ||
-    "https://wa.me/2347055435599?text=Hello%20Al-Burhan%2C%20I%27d%20like%20to%20book%20a%20consultation.";
-  const office = profile.office || "Sabon Gari, Zaria, Kaduna State, Nigeria";
-  const cities = profile.cities || "Kaduna State, Nigeria";
-  const noteOnCare =
-    profile.noteOnCare ||
-    "Please share what you would like help with when you contact us. Our team can explain the screening or therapy options available and advise on the next step. This website is for information and appointment enquiries; it is not a substitute for emergency medical care.";
+  const phoneDisplay = profile.phoneDisplay || profile.phone;
+  const phoneInternational = profile.phoneInternational;
+  const email = profile.email;
+  const whatsappUrl = profile.whatsappUrl;
+  const office = profile.office;
+  const cities = profile.cities;
+  const noteOnCare = profile.noteOnCare;
 
   return (
     <div className="pb-16 sm:pb-24">
@@ -98,16 +94,16 @@ export default async function ContactPage() {
         </div>
 
         {/* Visit Us / Location */}
-        <div className="modern-card bg-foreground p-6 text-background sm:p-9 md:p-12 flex flex-col justify-between">
+        <div className="modern-card !bg-foreground !text-background p-6 sm:p-9 md:p-12 flex flex-col justify-between">
           <div>
-            <p className="eyebrow border-background/20 bg-background/5 text-background">
+            <p className="eyebrow border-background/20 bg-background/5 !text-background">
               VISIT US
             </p>
             <div className="mt-8 flex h-12 w-12 items-center justify-center rounded-2xl bg-background/10 text-[#f2c96c]">
               <MapPin size={24} />
             </div>
-            <h2 className="mt-5 text-2xl sm:text-3xl font-medium tracking-tight">
-              {office.split(",")[0]?.trim() || "Sabon Gari"}, {office.split(",")[1]?.trim() || "Zaria"}.
+            <h2 className="mt-5 text-2xl sm:text-3xl font-medium tracking-tight text-background">
+              {office?.split(",")[0]?.trim()}, {office?.split(",")[1]?.trim()}.
             </h2>
             <p className="mt-2.5 max-w-sm text-sm sm:text-base leading-relaxed text-background/70">
               {office}. Contact the team ahead of your visit so we can help you

@@ -3,15 +3,15 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import { X, CheckCircle2, MessageCircle, Phone, Clock, Sparkles } from "lucide-react";
-import type { Product } from "@/lib/products-data";
-import { company } from "@/lib/company";
+import type { Product } from "@/sanity/queries";
 
 type ProductModalProps = {
   product: Product | null;
   onClose: () => void;
+  phoneInternational?: string;
 };
 
-export function ProductModal({ product, onClose }: ProductModalProps) {
+export function ProductModal({ product, onClose, phoneInternational }: ProductModalProps) {
   // Prevent background scroll when modal is active
   useEffect(() => {
     if (!product) return;
@@ -169,7 +169,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           </a>
 
           <a
-            href={`tel:${company.phoneInternational}`}
+            href={phoneInternational ? `tel:${phoneInternational}` : undefined}
             className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-xs sm:text-sm font-medium text-foreground transition-all active:scale-95 hover:bg-muted"
           >
             <Phone size={16} className="text-[#a67931]" />

@@ -23,41 +23,20 @@ const ICON_MAP = {
   Leaf,
 };
 
-const fallbackServices = [
-  {
-    title: "Quantum Resonance Magnetic",
-    text: "Modern diagnostic screening to help identify health concerns before choosing a care pathway.",
-    icon: ScanLine,
-  },
-  {
-    title: "Gun massager therapy",
-    text: "Targeted massage support for tired muscles, mobility and everyday recovery.",
-    icon: HeartPulse,
-  },
-  {
-    title: "Cupping therapy",
-    text: "A traditional wellness practice delivered with care, cleanliness and attention.",
-    icon: Sparkles,
-  },
-];
-
 type HomePageProps = {
-  services?: SanityService[];
-  profile?: SanityCompanyProfile;
+  services: SanityService[];
+  profile: SanityCompanyProfile;
 };
 
 export function HomePage({ services: initialServices, profile }: HomePageProps) {
-  const displayServices =
-    initialServices && initialServices.length > 0
-      ? initialServices.slice(0, 3).map((s) => ({
-          title: s.title,
-          text: s.desc,
-          icon: ICON_MAP[s.icon as keyof typeof ICON_MAP] || Sparkles,
-        }))
-      : fallbackServices;
+  const displayServices = initialServices.slice(0, 3).map((s) => ({
+    title: s.title,
+    text: s.desc,
+    icon: ICON_MAP[s.icon as keyof typeof ICON_MAP] || Sparkles,
+  }));
 
-  const yearEstablished = profile?.yearEstablished || "2015";
-  const cities = profile?.cities || "Zaria, Kaduna State";
+  const yearEstablished = profile.yearEstablished;
+  const cities = profile.cities;
   return (
     <div>
       {/* Hero Section */}
@@ -100,10 +79,10 @@ export function HomePage({ services: initialServices, profile }: HomePageProps) 
               </div>
               <div className="rounded-2xl border border-border/70 bg-surface/60 p-3.5 sm:border-0 sm:bg-transparent sm:p-0">
                 <strong className="block text-xl sm:text-2xl font-semibold text-foreground">
-                  {cities.split(",")[0]?.trim() || "Zaria"}
+                  {cities?.split(",")[0]?.trim()}
                 </strong>
                 <span className="text-xs sm:text-sm">
-                  {cities.split(",").slice(1).join(",").trim() || "Kaduna State"}
+                  {cities?.split(",").slice(1).join(",").trim()}
                 </span>
               </div>
             </div>

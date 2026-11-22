@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { company, mainNav } from "@/lib/company";
+import { mainNav } from "@/lib/company";
 import type { SanityCompanyProfile } from "@/sanity/queries";
 
 type FooterProps = {
@@ -7,10 +7,10 @@ type FooterProps = {
 };
 
 export function Footer({ profile }: FooterProps) {
-  const office = profile?.office || company.office;
-  const phoneDisplay = profile?.phoneDisplay || profile?.phone || company.phoneDisplay;
-  const phoneInternational = profile?.phoneInternational || company.phoneInternational;
-  const email = profile?.email || company.email;
+  const office = profile?.office;
+  const phoneDisplay = profile?.phoneDisplay || profile?.phone;
+  const phoneInternational = profile?.phoneInternational;
+  const email = profile?.email;
 
   return (
     <footer className="border-t border-border bg-surface pb-28 sm:pb-24 lg:pb-12">

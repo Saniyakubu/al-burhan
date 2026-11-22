@@ -16,7 +16,7 @@ import {
   Package,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { company, mainNav } from "@/lib/company";
+import { mainNav } from "@/lib/company";
 import type { SanityCompanyProfile } from "@/sanity/queries";
 
 type HeaderProps = {
@@ -28,10 +28,10 @@ export function Header({ profile }: HeaderProps) {
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
 
-  const phoneInternational = profile?.phoneInternational || company.phoneInternational;
-  const phoneDisplay = profile?.phoneDisplay || profile?.phone || company.phoneDisplay;
-  const whatsappUrl = profile?.whatsappUrl || company.whatsappUrl;
-  const office = profile?.office || company.office;
+  const phoneInternational = profile?.phoneInternational;
+  const phoneDisplay = profile?.phoneDisplay || profile?.phone;
+  const whatsappUrl = profile?.whatsappUrl;
+  const office = profile?.office;
 
   // Close menu on route change
   if (prevPathname !== pathname) {

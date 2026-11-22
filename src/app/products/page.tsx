@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ProductGalleryClient } from "@/components/product-gallery-client";
-import { getProducts, getProductCategories } from "@/sanity/queries";
+import { getProducts, getProductCategories, getCompanyProfile } from "@/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Herbal Product Gallery | Al-Burhan",
@@ -9,9 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductsPage() {
-  const [products, categories] = await Promise.all([
+  const [products, categories, profile] = await Promise.all([
     getProducts(),
     getProductCategories(),
+    getCompanyProfile(),
   ]);
 
   return (
@@ -34,6 +35,7 @@ export default async function ProductsPage() {
         <ProductGalleryClient
           initialProducts={products}
           categories={categories}
+          phoneInternational={profile.phoneInternational}
         />
       </section>
     </div>

@@ -1,4 +1,3 @@
-import { company } from "@/lib/company";
 import { MessageCircle } from "lucide-react";
 
 type FloatingWhatsAppProps = {
@@ -6,7 +5,7 @@ type FloatingWhatsAppProps = {
 };
 
 export function FloatingWhatsApp({ whatsappUrl }: FloatingWhatsAppProps) {
-  const href = whatsappUrl ?? company.whatsappUrl;
+  const href = whatsappUrl;
 
   return (
     <div

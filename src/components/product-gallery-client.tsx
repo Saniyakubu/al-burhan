@@ -11,26 +11,24 @@ import {
   ArrowRight,
   Filter,
 } from "lucide-react";
-import {
-  productsData,
-  PRODUCT_CATEGORIES,
-  type Product,
-} from "@/lib/products-data";
+import type { Product } from "@/sanity/queries";
 import { ProductModal } from "./product-modal";
 
 const INITIAL_PAGE_SIZE = 8;
 
 type ProductGalleryClientProps = {
-  initialProducts?: Product[];
-  categories?: string[];
+  initialProducts: Product[];
+  categories: string[];
+  phoneInternational?: string;
 };
 
 export function ProductGalleryClient({
   initialProducts,
   categories,
+  phoneInternational,
 }: ProductGalleryClientProps) {
-  const allProducts = initialProducts && initialProducts.length > 0 ? initialProducts : productsData;
-  const filterCategories = categories && categories.length > 0 ? categories : (PRODUCT_CATEGORIES as unknown as string[]);
+  const allProducts = initialProducts;
+  const filterCategories = categories;
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
@@ -286,6 +284,7 @@ export function ProductGalleryClient({
       <ProductModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
+        phoneInternational={phoneInternational}
       />
     </div>
   );
